@@ -1,0 +1,48 @@
+﻿
+@model CalculatorWebUI.Models.Calc
+@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+<head>
+
+</head>
+<body>
+    <h2>Calculator</h2>
+    <div>
+        @using (Html.BeginForm("/Index", "calculator", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label for="value1">Value1</label>
+                <input class="form-control" type="text" id="value1" name="value1" value="@Model.value1" />
+
+            </div>
+
+            <div class="form-group">
+                <label for="value2">Value2</label>
+                <input class="form-control" type="text" id="value2" name="value2" value="@Model.value2  " />
+
+            </div>
+
+            <div class="form-group">
+                <label for="result">result</label>
+                <input class="form-control" type="text" id="result" name="result" value="@Model.result  " />
+
+            </div>
+
+            <button type="submit" class="btn btn-info" id="btnAdd" value="Add" name="calculate">+</button>
+            <button type="submit" class="btn btn-danger" id="btnSubstract" value="Substract" name="calculate">-</button>
+            <button type="submit" class="btn btn-warning" id="btnMultiply" value="Multiply" name="calculate">*</button>
+            <button type="submit" class="btn btn-primary" id="btnDivide" value="Divide" name="calculate">/</button>
+        }
+
+    </div>
+
+</body>
+
+</html>
+
+
+
+

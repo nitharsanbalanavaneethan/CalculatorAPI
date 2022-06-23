@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Calculator View</title>
+    <script src="../scripts/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function () {            
+            $(":button").click(function (event) {
+                debugger;
+                var value1 = $("#txtValue1").val();
+                var value2 = $("#txtValue2").val();
+
+                var arguments = "value1=" + value1 + "&value2=" + value2;
+                var control = event.target || event.srcElement;
+                var id = control.id
+
+                var urlString = "/api/calc/";
+
+                switch (id) {
+                    case 'btnAdd':
+                        urlString = urlString + "Add/?" + arguments;
+                        break;
+
+                    case 'btnSubstract':
+                        urlString = urlString + "Substract/?" + arguments;
+                        break;
+
+                    case 'btnMultiply':
+                        urlString = urlString + "Multiply/?" + arguments;
+                        break;
+
+                    case 'btnDivide':
+                        urlString = urlString + "Divide/?" + arguments;
+                        break;
+
+                    default:
+                        urlString = urlString + "Calculator";
+
+                }
+
+                $.ajax({
+                    url: urlString,
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (result) {
+                        $("#txtResult").val(result);
+
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = eval("(" + xhr.responseText + ")");
+                        $("#txtResult").val(errorMessage.Message)
+                    }
+                });
+            });
+
+
+        });
+    </script>
+
+
+</head>
+<body>
+    <div style="text-align: center; border:2px solid black;" >
+        <h3>Calculator (Testing Client - JQuery)</h3>
+        Please enter Value1 :   <input type="number" id="txtValue1"><br /><br />
+        Please enter Value2 :   <input type="number" id="txtValue2"><br /><br />
+
+        Result( Calculator API) : <input type="text" id="txtResult" disabled /><br /><br />
+
+         
+        <input type="button" value="Add" id="btnAdd" />
+        <input type="button" value="Substract" id="btnSubstract" />
+        <input type="button" value="Multiply" id="btnMultiply" />
+        <input type="button" value="Divide" id="btnDivide" /><br /><br />
+
+    </div>
+
+
+
+</body>
+</html>
